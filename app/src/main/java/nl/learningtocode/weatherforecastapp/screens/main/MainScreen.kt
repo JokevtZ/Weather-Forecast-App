@@ -6,8 +6,6 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.produceState
 import androidx.compose.ui.Alignment
@@ -28,39 +26,39 @@ import nl.learningtocode.weatherforecastapp.widgets.WeatherAppBar
 @Composable
 fun MainScreen(navController: NavController, mainViewModel: MainViewModel = hiltViewModel()){
 
-    val weatherData = produceState< DataOrException < Weather, Boolean, Exception>>(initialValue = DataOrException(loading = true))
+    val weatherData = produceState< DataOrException <Weather, Boolean, Exception>>(initialValue = DataOrException(loading = true))
     {
-        value = mainViewModel.getWeather(city = "Moscow")
+        value = mainViewModel.getWeather(city = "Leiden")
     }.value
 
     if (weatherData.loading == true) {
         CircularProgressIndicator()
     }else if (weatherData.data != null) {
-        MainScaffold(weatherData = weatherData.data!!, navController = navController)
+        MainScaffold(weather = weatherData.data!!, navController = navController)
 
     }
 }
 
 @Composable
-fun MainScaffold(weatherData : Weather, navController : NavController){
+fun MainScaffold(weather : Weather, navController : NavController){
     Scaffold(topBar = {
         WeatherAppBar(
-            title = weatherData.name + " - ${weatherData.sys.country}",
+            title = weather.city.name + " - ${weather.city.country}",
             navController = navController,
             elevation = 5.dp){
             Log.d(TAG, "MainScaffold: ButtonClicked")
         }
     })
     {
-        MainContent(data = weatherData)
+        MainContent(data = weather)
     }
 }
 
 @Composable
 fun MainContent(data: Weather){
 
-    val weatherItem = data.weather[0]
-    val imageUrl = "https://openweathermap.org/img/wn/${weatherItem.icon}.png"
+    val weatherItem = data.list[0]
+    val imageUrl = "https://openweathermap.org/img/wn/${weatherItem.weather[0].icon}.png"
 
     Column(modifier = Modifier
         .padding(4.dp)
@@ -69,7 +67,7 @@ fun MainContent(data: Weather){
         horizontalAlignment = Alignment.CenterHorizontally
     )
     {
-        Text(text = formatDate(data.dt),
+        Text(text = formatDate(weatherItem.dt),
             style = MaterialTheme.typography.caption,
             color = MaterialTheme.colors.onSecondary,
             fontWeight = FontWeight.SemiBold,
@@ -85,15 +83,14 @@ fun MainContent(data: Weather){
             Column(verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
                 //Image
-
             )
             {
                 WeatherStateImage(imageUrl)
 
-                Text(text = formatDecimals(data.main.temp),
+                Text(text = formatDecimals(weatherItem.temp.day) + "º",
                 style = MaterialTheme.typography.h4,
                 fontWeight = FontWeight.ExtraBold)
-                    Text(text = weatherItem.main,
+                    Text(text = weatherItem.weather[0].main,
                         fontStyle = FontStyle.Italic
                     )
                 

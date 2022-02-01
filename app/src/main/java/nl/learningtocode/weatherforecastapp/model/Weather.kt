@@ -1,17 +1,9 @@
 package nl.learningtocode.weatherforecastapp.model
 
 data class Weather(
-    val base: String,
-    val clouds: Clouds,
-    val cod: Int,
-    val coord: Coord,
-    val dt: Int,
-    val id: Int,
-    val main: Main,
-    val name: String,
-    val sys: Sys,
-    val timezone: Int,
-    val visibility: Int,
-    val weather: List<WeatherX>,
-    val wind: Wind
+    val city: City,
+    val cnt: Int,
+    val cod: String,
+    val list: List<WeatherItem>,
+    val message: Double
 )

@@ -4,8 +4,6 @@ plugins {
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
 }
-def localProperties = new Properties()
-localProperties.load(new FileInputStream(rootProject.file("local.properties")))
 
 android {
     compileSdk 31
@@ -21,10 +19,6 @@ android {
         vectorDrawables {
             useSupportLibrary true
         }
-    }
-
-    defaultConfig{
-        buildConfigField "String", "API_KEY",localProperties['apiKey']
     }
 
     buildTypes {

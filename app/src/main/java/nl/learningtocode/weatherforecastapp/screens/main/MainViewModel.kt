@@ -1,12 +1,7 @@
 package nl.learningtocode.weatherforecastapp.screens.main
 
-import android.util.Log
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.launch
 import nl.learningtocode.weatherforecastapp.data.DataOrException
 import nl.learningtocode.weatherforecastapp.model.Weather
 import nl.learningtocode.weatherforecastapp.repository.WeatherRepository
