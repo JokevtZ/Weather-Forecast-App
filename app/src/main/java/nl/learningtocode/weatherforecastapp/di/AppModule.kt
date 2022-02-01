@@ -13,7 +13,7 @@ import javax.inject.Singleton
 //Retrofit dependency injection
 @Module
 @InstallIn(SingletonComponent::class)
-interface AppModule {
+class AppModule {
     @Provides
     @Singleton
     fun provideOpenWeatherApi(): WeatherApi {

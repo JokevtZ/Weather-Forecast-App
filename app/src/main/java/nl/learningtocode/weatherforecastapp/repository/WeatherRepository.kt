@@ -1,5 +1,6 @@
 package nl.learningtocode.weatherforecastapp.repository
 
+import android.util.Log
 import nl.learningtocode.weatherforecastapp.data.DataOrException
 import nl.learningtocode.weatherforecastapp.model.Weather
 import nl.learningtocode.weatherforecastapp.network.WeatherApi
@@ -10,8 +11,10 @@ class WeatherRepository @Inject constructor(private val api: WeatherApi){
         val response = try {
             api.getWeather(query = cityQuery)
         }catch(e: Exception){
+            Log.d("EXEPTION", "getWeather : $e")
             return DataOrException(e = e)
         }
+        Log.d("INSIDE", "getWeatger: $response")
         return DataOrException(data = response)
     }
 
