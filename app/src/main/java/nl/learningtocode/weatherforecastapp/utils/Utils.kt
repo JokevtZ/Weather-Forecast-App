@@ -20,5 +20,5 @@ fun simpleDateFormat(timestamp: Int): String {
 }
 
 fun formatDecimals(item : Double): String{
-    return " % 0f".format(item)
+    return " %.0f".format(item)
 }

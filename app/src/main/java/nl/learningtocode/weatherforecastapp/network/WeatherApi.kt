@@ -1,7 +1,7 @@
 package nl.learningtocode.weatherforecastapp.network
 
 import nl.learningtocode.weatherforecastapp.model.Weather
-import nl.learningtocode.weatherforecastapp.utils.Constants.API_KEY
+import nl.learningtocode.weatherforecastapp.utils.Constants.KEY
 import retrofit2.http.GET
 import retrofit2.http.Query
 import javax.inject.Singleton
@@ -12,6 +12,6 @@ interface WeatherApi{
     suspend fun getWeather(
         @Query("q") query: String,
         @Query("units") units: String = "metric",
-        @Query("appid") appid: String = API_KEY
+        @Query("appid") appid: String = KEY
     ): Weather
 }
