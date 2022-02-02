@@ -27,8 +27,7 @@ fun WeatherAppBar(
     elevation : Dp = 0.dp,
     navController : NavController,
     onAddActionClicked : () -> Unit = {},
-    onButtonClicked : () -> Unit = {})
-{
+    onButtonClicked : () -> Unit = {}) {
 
     TopAppBar(
         title = {

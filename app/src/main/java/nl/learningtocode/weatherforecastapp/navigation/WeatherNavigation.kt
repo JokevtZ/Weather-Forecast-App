@@ -12,7 +12,8 @@ import nl.learningtocode.weatherforecastapp.screens.main.MainViewModel
 @Composable
 fun WeatherNavigation() {
     val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = WeatherScreens.SPLASH_SCREEN.name )
+    NavHost(navController = navController,
+        startDestination = WeatherScreens.SPLASH_SCREEN.name )
     {
         composable(WeatherScreens.SPLASH_SCREEN.name)
         {
