@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat
 
 @SuppressLint("SimpleDateFormat")
 fun formatDate(timestamp: Int): String{
-    val simpleDateFormat = SimpleDateFormat("EEE, d MMM")
+    val simpleDateFormat = SimpleDateFormat("EEE, d MMM yyyy")
     val date = java.util.Date(timestamp.toLong() * 1000)
 
     return simpleDateFormat.format(date)
@@ -13,7 +13,7 @@ fun formatDate(timestamp: Int): String{
 
 @SuppressLint("SimpleDateFormat")
 fun simpleDateFormat(timestamp: Int): String {
-    val simpleDateFormat = SimpleDateFormat("hh:mm:aa")
+    val simpleDateFormat = SimpleDateFormat("HH:mm")
     val date = java.util.Date(timestamp.toLong() * 1000)
 
     return simpleDateFormat.format(date)

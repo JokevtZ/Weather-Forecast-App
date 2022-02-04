@@ -67,7 +67,8 @@ fun SplashScreen(navController : NavController){
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            Image(painter = painterResource(id = R.drawable.sun), contentDescription = "Icon Sun",
+            Image(painter = painterResource(id = R.drawable.weather),
+                contentDescription = "Icon Sun",
                 contentScale = ContentScale.Fit,
                 modifier = Modifier
                     .size(95.dp))
