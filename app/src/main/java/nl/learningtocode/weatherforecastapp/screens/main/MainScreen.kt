@@ -4,18 +4,23 @@ import android.content.ContentValues.TAG
 import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.CornerSize
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
-import androidx.compose.material.CheckboxDefaults.colors
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.produceState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.painter.ColorPainter
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
@@ -27,14 +32,14 @@ import nl.learningtocode.weatherforecastapp.model.WeatherItem
 import nl.learningtocode.weatherforecastapp.utils.formatDate
 import nl.learningtocode.weatherforecastapp.utils.formatDecimals
 import nl.learningtocode.weatherforecastapp.utils.simpleDateFormat
-import nl.learningtocode.weatherforecastapp.widgets.WeatherAppBar
+import nl.learningtocode.weatherforecastapp.widgets.*
 
 @Composable
 fun MainScreen(navController: NavController, mainViewModel: MainViewModel = hiltViewModel()){
 
     val weatherData = produceState< DataOrException <Weather, Boolean, Exception>>(initialValue = DataOrException(loading = true))
     {
-        value = mainViewModel.getWeatherData(city = "Lisse")
+        value = mainViewModel.getWeatherData(city = "lisse")
     }.value
 
     if (weatherData.loading == true) {
@@ -98,101 +103,30 @@ fun MainContent(data: Weather){
                     Text(text = weatherItem.weather[0].main,
                         fontStyle = FontStyle.Italic
                     )
-
             }
-
         }
         HumidityWindPressureRow(weather = weatherItem)
         Divider()
         SunsetSunriseRow(weather = weatherItem)
-    }
-}
-
-@Composable
-fun SunsetSunriseRow(weather: WeatherItem) {
-    Row(modifier = Modifier
-        .padding(12.dp)
-        .fillMaxWidth(),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceBetween
-    ) {
-        Row(
-            modifier = Modifier
-                .padding(4.dp)
+        Text(text = "Week",
+            style = MaterialTheme.typography.subtitle1,
+            fontWeight = FontWeight.Bold
         )
-        {
-            Icon(
-                painter = painterResource(id = R.drawable.sunrise),
-                contentDescription = "Sunrise Icon",
-                modifier = Modifier
-                    .size(25.dp),
-            )
-            Text(
-                text = simpleDateFormat(weather.sunrise),
-                style = MaterialTheme.typography.caption
-            )
-        }
-
-        Row() {
-            Icon(
-                painter = painterResource(id = R.drawable.sunset),
-                contentDescription = "Sunset Icon",
-                modifier = Modifier
-                    .size(25.dp),
-            )
-            Text(
-                text = simpleDateFormat(weather.sunset),
-                style = MaterialTheme.typography.caption
-            )
-        }
-    }
-
-}
-
-@Composable
-fun HumidityWindPressureRow(weather: WeatherItem) {
-    Row(modifier = Modifier
-        .padding(12.dp)
-        .fillMaxWidth(),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceBetween
-    ) {
-        Row(modifier = Modifier
-            .padding(4.dp))
-        {
-            Icon(painter = painterResource(id = R.drawable.humidity),
-                contentDescription = "Humidity Icon",
-                modifier = Modifier
-                    .size(20.dp))
-            Text(text = "${weather.humidity}%",
-            style = MaterialTheme.typography.caption)
-        }
-
-        Row() {
-            Icon(painter = painterResource(id = R.drawable.pressure),
-                contentDescription = "Wind Icon",
-                modifier = Modifier
-                    .size(20.dp))
-            Text(text = "${weather.pressure} bar",
-                style = MaterialTheme.typography.caption)
-        }
-
-        Row() {
-            Icon(painter = painterResource(id = R.drawable.wind),
-                contentDescription = "Wind Icon",
-                modifier = Modifier
-                    .size(20.dp))
-            Text(text = "${weather.humidity} km/h",
-                style = MaterialTheme.typography.caption)
+        Surface(modifier = Modifier
+            .fillMaxWidth()
+            .fillMaxHeight(),
+            color = Color(0xFFEEF1EF),
+            shape = RoundedCornerShape(size = 14.dp)
+        ) {
+            LazyColumn(modifier = Modifier
+                .padding(2.dp),
+            contentPadding = PaddingValues(1.dp))
+            {
+                items(items = data.list) {item: WeatherItem ->
+                    WeatherDetailRow(weather = item)
+                }
+            }
         }
     }
 }
 
-@Composable
-fun WeatherStateImage(imageUrl: String) {
-
-    Image(painter = rememberImagePainter(imageUrl),
-        contentDescription = "icon image",
-        modifier = Modifier
-            .size(80.dp))
-}
