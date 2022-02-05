@@ -29,17 +29,23 @@ import nl.learningtocode.weatherforecastapp.R
 import nl.learningtocode.weatherforecastapp.data.DataOrException
 import nl.learningtocode.weatherforecastapp.model.Weather
 import nl.learningtocode.weatherforecastapp.model.WeatherItem
+import nl.learningtocode.weatherforecastapp.navigation.WeatherScreens
 import nl.learningtocode.weatherforecastapp.utils.formatDate
 import nl.learningtocode.weatherforecastapp.utils.formatDecimals
 import nl.learningtocode.weatherforecastapp.utils.simpleDateFormat
 import nl.learningtocode.weatherforecastapp.widgets.*
 
 @Composable
-fun MainScreen(navController: NavController, mainViewModel: MainViewModel = hiltViewModel()){
+fun MainScreen(
+    navController: NavController,
+    mainViewModel: MainViewModel = hiltViewModel(),
+    city: String?
+){
+    Log.d(TAG, "MainScreen: $city")
 
     val weatherData = produceState< DataOrException <Weather, Boolean, Exception>>(initialValue = DataOrException(loading = true))
     {
-        value = mainViewModel.getWeatherData(city = "lisse")
+        value = mainViewModel.getWeatherData(city = "$city")
     }.value
 
     if (weatherData.loading == true) {
@@ -55,6 +61,9 @@ fun MainScaffold(weather : Weather, navController : NavController){
         WeatherAppBar(
             title = weather.city.name + " - ${weather.city.country}",
             navController = navController,
+            onAddActionClicked = {
+                                 navController.navigate(WeatherScreens.SEARCH_SCREEN.name)
+            },
             elevation = 5.dp){
             Log.d(TAG, "MainScaffold: ButtonClicked")
         }

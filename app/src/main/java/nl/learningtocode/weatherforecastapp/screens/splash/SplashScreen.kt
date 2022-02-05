@@ -1,4 +1,4 @@
-package nl.learningtocode.weatherforecastapp.screens
+package nl.learningtocode.weatherforecastapp.screens.splash
 
 import android.view.animation.OvershootInterpolator
 import androidx.compose.animation.core.tween
@@ -29,6 +29,7 @@ import nl.learningtocode.weatherforecastapp.navigation.WeatherScreens
 
 @Composable
 fun SplashScreen(navController : NavController){
+    val defaultCity = "Lisse"
 
     val scale = remember {
         androidx.compose.animation.core.Animatable(0f)
@@ -48,7 +49,7 @@ fun SplashScreen(navController : NavController){
                 }
             ))
         delay(2000L)
-        navController.navigate(WeatherScreens.MAIN_SCREEN.name)
+        navController.navigate(WeatherScreens.MAIN_SCREEN.name + "/$defaultCity")
     })
 
 
