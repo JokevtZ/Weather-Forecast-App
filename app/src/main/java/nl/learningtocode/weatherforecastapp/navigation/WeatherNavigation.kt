@@ -8,10 +8,13 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import nl.learningtocode.weatherforecastapp.screens.about.AboutScreen
+import nl.learningtocode.weatherforecastapp.screens.favorites.FavoritesScreen
 import nl.learningtocode.weatherforecastapp.screens.main.MainScreen
 import nl.learningtocode.weatherforecastapp.screens.splash.SplashScreen
 import nl.learningtocode.weatherforecastapp.screens.main.MainViewModel
 import nl.learningtocode.weatherforecastapp.screens.search.SearchScreen
+import nl.learningtocode.weatherforecastapp.screens.settings.SettingsScreen
 
 @ExperimentalComposeUiApi
 @Composable
@@ -45,6 +48,21 @@ fun WeatherNavigation() {
         composable(WeatherScreens.SEARCH_SCREEN.name)
         {
             SearchScreen(navController = navController)
+        }
+
+        composable(WeatherScreens.FAVORITE_SCREEN.name)
+        {
+            FavoritesScreen(navController = navController)
+        }
+
+        composable(WeatherScreens.SETTINGS_SCREEN.name)
+        {
+            SettingsScreen(navController = navController)
+        }
+
+        composable(WeatherScreens.ABOUT_SCREEN.name)
+        {
+            AboutScreen(navController = navController)
         }
     }
 }

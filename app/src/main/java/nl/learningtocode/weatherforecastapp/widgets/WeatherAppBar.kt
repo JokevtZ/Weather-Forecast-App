@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import nl.learningtocode.weatherforecastapp.navigation.WeatherScreens
 
 
 //@Preview
@@ -90,7 +91,7 @@ fun ShowSettingsDropdownDialog(
     navController: NavController) {
 
     var expanded by remember { mutableStateOf(true) }
-    val items = listOf("Favorite", "Settings", "About")
+    val items = listOf("Favorites", "Settings", "About")
 
     Column(modifier = Modifier
         .fillMaxWidth()
@@ -116,9 +117,17 @@ fun ShowSettingsDropdownDialog(
                             else -> Icons.Default.Info
                         },
                         contentDescription = null,
-                        tint = Color.Gray)
+                        tint = Color.Gray
+                    )
                     Text(text = text, modifier = Modifier.clickable
                     {
+                        navController.navigate(
+                            when (text){
+                                "Favorite" -> WeatherScreens.FAVORITE_SCREEN.name
+                                "Settings" -> WeatherScreens.SETTINGS_SCREEN.name
+                                else -> WeatherScreens.ABOUT_SCREEN.name
+                            }
+                        )
                     },
                     fontWeight = FontWeight.W300)
                 }
