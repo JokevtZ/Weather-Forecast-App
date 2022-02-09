@@ -58,9 +58,9 @@ fun SplashScreen(navController : NavController){
         .size(330.dp)
         .scale(scale.value),
         shape = CircleShape,
-        color = Color.White,
+        color = Color(0xFF7C61F0),
         border = BorderStroke(width = 2.dp,
-        color = Color.LightGray)
+        color = Color.Black)
     ) {
     
         Column(modifier = Modifier
@@ -75,7 +75,7 @@ fun SplashScreen(navController : NavController){
                     .size(95.dp))
             Text(text = "Let's find the Sun?",
                 style = MaterialTheme.typography.h5,
-                color = Color.LightGray)
+                color = Color.Black)
         }
     }
     

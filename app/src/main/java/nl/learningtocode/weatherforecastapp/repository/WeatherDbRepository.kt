@@ -1,7 +1,7 @@
 package nl.learningtocode.weatherforecastapp.repository
 
 import kotlinx.coroutines.flow.Flow
-import nl.learningtocode.weatherforecastapp.data.dao.WeatherDao
+import nl.learningtocode.weatherforecastapp.data.WeatherDao
 import nl.learningtocode.weatherforecastapp.model.Favorite
 import javax.inject.Inject
 

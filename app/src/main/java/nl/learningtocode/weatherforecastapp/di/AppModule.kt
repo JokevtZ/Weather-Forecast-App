@@ -1,7 +1,6 @@
 package nl.learningtocode.weatherforecastapp.di
 
 import android.content.Context
-import androidx.room.Database
 import androidx.room.Room
 import dagger.Module
 import dagger.Provides
@@ -9,7 +8,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import nl.learningtocode.weatherforecastapp.data.WeatherDatabase
-import nl.learningtocode.weatherforecastapp.data.dao.WeatherDao
+import nl.learningtocode.weatherforecastapp.data.WeatherDao
 import nl.learningtocode.weatherforecastapp.network.WeatherApi
 import nl.learningtocode.weatherforecastapp.utils.Constants
 import retrofit2.Retrofit

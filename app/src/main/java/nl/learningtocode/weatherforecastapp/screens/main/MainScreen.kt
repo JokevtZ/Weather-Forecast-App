@@ -41,17 +41,16 @@ fun MainScreen(
     mainViewModel: MainViewModel = hiltViewModel(),
     city: String?
 ){
-    Log.d(TAG, "MainScreen: $city")
-
     val weatherData = produceState< DataOrException <Weather, Boolean, Exception>>(initialValue = DataOrException(loading = true))
     {
-        value = mainViewModel.getWeatherData(city = "$city")
+        value = mainViewModel.getWeatherData(city = city.toString())
     }.value
 
     if (weatherData.loading == true) {
         CircularProgressIndicator()
     }else if (weatherData.data != null) {
-        MainScaffold(weather = weatherData.data!!, navController = navController)
+        MainScaffold(weather = weatherData.data!!,
+            navController = navController)
     }
 }
 
@@ -97,7 +96,7 @@ fun MainContent(data: Weather){
             .padding(4.dp)
             .size(200.dp),
             shape =  CircleShape,
-            color = Color(0xFFFFC400)
+            color = Color(0xFF7C61F0)
         ) {
             Column(verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
@@ -124,7 +123,7 @@ fun MainContent(data: Weather){
         Surface(modifier = Modifier
             .fillMaxWidth()
             .fillMaxHeight(),
-            color = Color(0xFFEEF1EF),
+            color = Color(0xFFACACF0),
             shape = RoundedCornerShape(size = 14.dp)
         ) {
             LazyColumn(modifier = Modifier

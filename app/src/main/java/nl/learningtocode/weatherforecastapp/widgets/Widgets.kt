@@ -58,7 +58,7 @@ fun WeatherDetailRow(weather:WeatherItem) {
             Surface(
                 modifier = Modifier.padding(0.dp),
                 shape = CircleShape,
-                color = Color(0xFFFFC400)
+                color = Color(0xFF8C76EC)
             )
             {
                 Text(

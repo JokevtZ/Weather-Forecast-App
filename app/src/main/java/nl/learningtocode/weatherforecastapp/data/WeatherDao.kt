@@ -1,4 +1,4 @@
-package nl.learningtocode.weatherforecastapp.data.dao
+package nl.learningtocode.weatherforecastapp.data
 
 import androidx.room.*
 import kotlinx.coroutines.flow.Flow

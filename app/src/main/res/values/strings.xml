@@ -2,5 +2,5 @@
     <string name="app_name">Weather Forecast App</string>
     <string name="about_app">Weather App version 0.1</string>
     <string name="api_used">API hosted by: https://openweathermap.org</string>
-    <string name="made_by">Made by: JokevtZ@learningtocode.nl</string>
+    <string name="made_by">Made by: @learningtocode.nl</string>
 </resources>
