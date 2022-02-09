@@ -58,7 +58,7 @@ fun WeatherDetailRow(weather:WeatherItem) {
             Surface(
                 modifier = Modifier.padding(0.dp),
                 shape = CircleShape,
-                color = Color(0xFF8C76EC)
+                color = Color(0xFF9F8EE6)
             )
             {
                 Text(
@@ -132,7 +132,7 @@ fun SunsetSunriseRow(weather: WeatherItem) {
 }
 
 @Composable
-fun HumidityWindPressureRow(weather: WeatherItem) {
+fun HumidityWindPressureRow(weather: WeatherItem, isImperial: Boolean) {
     Row(modifier = Modifier
         .padding(12.dp)
         .fillMaxWidth(),
@@ -155,7 +155,9 @@ fun HumidityWindPressureRow(weather: WeatherItem) {
                 contentDescription = "Wind Icon",
                 modifier = Modifier
                     .size(20.dp))
-            Text(text = "${weather.pressure} bar",
+            Text(text = "${weather.pressure} " +
+                    if (isImperial)"psi"
+                    else "bar",
                 style = MaterialTheme.typography.caption)
         }
 
@@ -164,7 +166,9 @@ fun HumidityWindPressureRow(weather: WeatherItem) {
                 contentDescription = "Wind Icon",
                 modifier = Modifier
                     .size(20.dp))
-            Text(text = "${weather.humidity} km/h",
+            Text(text = "${weather.speed} " +
+                if (isImperial)"mph"
+                else "m/s",
                 style = MaterialTheme.typography.caption)
         }
     }
